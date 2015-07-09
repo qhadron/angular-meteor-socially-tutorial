@@ -1,21 +1,35 @@
 <form class="card">
-	<div class="input-field card-content">
-		<label for="input_name">Name:</label>
-		<input type="text" id="input_name" ng-model="newParty.name">
+	<div class="row">
+		<div class="input-field card-content col s6">
+			<label for="input_name">Name:</label>
+			<input type="text" id="input_name" ng-model="newParty.name">
+		</div>
+		<div class="input-field card-content col s6">
+			<label for="input_desc">Description:</label>
+			<input type="text" id="input_desc" ng-model="newParty.description">
+		</div>
 	</div>
-	<div class="input-field card-content">
-		<label for="input_desc">Description:</label>
-		<input type="text" id="input_desc" ng-model="newParty.description">
+	<!-- <div class="input-field card-content">
+		<input type="checkbox" id="checkbox_public" ng-model="newParty.public">
+		<label for="checkbox_public">Public</label>
+	</div>
+	-->
+	<div class="switch">
+		<label>Private
+			<input type="checkbox" ng-model="newParty.public">
+			<span class="lever"></span>Public</label>
 	</div>
 	<button ng-click="addParty()" class="right btn-floating blue btn-large waves-effect">
 		<i class="large material-icons">Add</i>
 	</button>
 </form>
 <button class="btn red waves-effect waves-light" ng-click="removeAll()">Remove All</button>
-<ul class="">
-	<li ng-repeat="party in parties" class="card hoverable">
+<div class="">
+	<div ng-repeat="party in parties" ng-class="'card hoverable '+ (party.public?'white':'grey')">
 		<button class="btn red waves-effect waves-light right" ng-click="remove(party)">X</button>
-		<a href="/parties/{{party._id}}" class="card-content"><span class="card-title black-text">{{party.name}}</span></a>
-		<p class="grey-text card-content">{{party.description}}</p>
-	</li>
-</ul>
+		<a ng-href="/parties/{{party._id}}" class="card-content">
+			<span class="card-title black-text">{{party.name}}</span>
+			<p class="grey-text card-content">{{party.description}}</p>
+		</a>
+	</div>
+</div>

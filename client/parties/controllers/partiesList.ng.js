@@ -1,6 +1,6 @@
 app.controller('PartiesListCtrl',
 	function ($scope, $meteor, $rootScope) {
-		$scope.parties = $meteor.collection(Parties);
+		$scope.parties = $meteor.collection(Parties).subscribe('parties');
 		$scope.remove = function (party) {
 			if (party.owner === $rootScope.currentUser._id) {
 				$scope.parties.remove(party);
