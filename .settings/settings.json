@@ -5,6 +5,7 @@
 		"**/.DS_Store": true,
 		"**/.meteor": true,
 		"**/.*":true,
-		"typings/**":true
+		"typings/**":true,
+		"bin/**" : true
 	}
 }
