@@ -1,12 +1,14 @@
 <head>
 	<base href="/">
 </head>
-
 <body ng-app="socially">
 	<header>
-	<h1 class="intro light-blue lighten-2 z-depth-1">
-		<a href="/parties" class="brand-logo white-text">Home</a>
-	</h1>
+		<h1 class="intro light-blue lighten-2 z-depth-1">
+			<a href="/parties" class="brand-logo white-text">Home</a>
+		</h1>
+		<meteor-include src="loginButtons" class="white-text btn light-blue"></meteor-include>
 	</header>
-	<div ui-view class="container"></div>
+	<div class="container">
+		<div ui-view class></div>
+	</div>
 </body>
