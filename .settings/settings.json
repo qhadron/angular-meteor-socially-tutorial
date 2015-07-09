@@ -4,6 +4,7 @@
 		"**/.git": true,
 		"**/.DS_Store": true,
 		"**/.meteor": true,
-		"**/.*":true
+		"**/.*":true,
+		"typings/**":true
 	}
 }
