@@ -2,7 +2,7 @@
 /// <reference path="typings/angular-meteor/angular-meteor.d.ts"/>
 
 /** Collections */
-Parties = new Mongo.Collection("parties");
+var Parties = new Mongo.Collection("parties");
 
 /** Angluar */
 if (Meteor.isClient) {
@@ -11,6 +11,12 @@ if (Meteor.isClient) {
 	app.controller('PartiesListCtrl',
 		function($scope,$meteor) {
 			$scope.parties = $meteor.collection(Parties);
+			$scope.remove = function(party) {
+				$scope.parties.remove(party);
+			}
+			$scope.removeAll = function() {
+				$scope.parties.remove();
+			}
 		});
 }
 

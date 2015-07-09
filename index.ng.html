@@ -1,8 +1,17 @@
 <div ng-controller="PartiesListCtrl">
+	<form>
+		<label for="input_name">Name:</label>
+		<input type="text" id="input_name" ng-model="newParty.name">
+		<label for="input_desc">Description:</label>
+		<input type="text" id="input_desc" ng-model="newParty.description">
+		<button ng-click="parties.save(newParty); newParty='';">Add</button>
+	</form>
+	<button ng-click="removeAll()">Remove All</button>
 	<ul>
 		<li ng-repeat="party in parties">
-			{{party.name}}
+			<strong>{{party.name}}</strong>
 			<p>{{party.description}}</p>
+			<button ng-click="remove(party)">X</button>
 		</li>
 	</ul>
 </div>
