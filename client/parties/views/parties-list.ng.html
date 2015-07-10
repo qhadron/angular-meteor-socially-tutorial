@@ -14,18 +14,27 @@
 			<input type="checkbox" ng-model="newParty.public">
 			<span class="lever"></span>Public</label>
 	</div>
-	<button ng-click="addParty()" class="right btn-floating blue btn-large waves-effect">
+	<button ng-click="addParty()" class="hoverable right blue btn-large waves-effect">
 		<i class="large material-icons">Add</i>
 	</button>
 </form>
 <button class="btn red waves-effect waves-light" ng-click="removeAll()">Remove All</button>
-<div class="">
-	<div ng-repeat="party in parties" ng-class="'card hoverable '+ (party.public?'white':'grey')">
+<a href="#" class="dropdown-button btn teal right"  data-activates="dropdown_sort" m-dropdown>Sort by</a>
+<ul id="dropdown_sort" class="dropdown-content">
+	<li ng-repeat="method in sortMethods">
+		<div ng-class="['btn','small',method.val===sort?'teal':'grey']" style="width: 100%" ng-click="sortBy(method.val)">
+			{{method.display}}
+		</div>
+	</li>
+</ul>
+<div>
+	<div dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" ng-class="['card', 'hoverable', party.public?'white':'grey']">
 		<button class="btn red waves-effect waves-light right" ng-click="remove(party)">X</button>
 		<a ng-href="/parties/{{party._id}}" class="card-content">
 			<span class="card-title black-text">{{party.name}}</span>
-			<p ng-class="'grey-text card-content '+(party.public?null:'text-lighten-4')">{{party.description}}</p>
+			<p ng-class="['grey-text', 'card-content', {'text-lighten-4':party.public}]">{{party.description}}</p>
 			<div class="secondary-content card-content">Owner: {{getUser(party.owner).emails[0].address||"Admin"}}</div>
 		</a>
 	</div>
+	<dir-pagination-controls on-page-change="pageChanged(newPageNumber)" auto-hide="true" template-url="client/common/views/pagination.ng.html"></dir-pagination-controls>
 </div>

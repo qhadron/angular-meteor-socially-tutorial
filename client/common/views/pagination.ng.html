@@ -1,0 +1,16 @@
+<div class="valign-wrapper">
+	<ul class="pagination row valign" ng-if="1 < pages.length">
+		<li ng-if="directionLinks" ng-class="['wave-effect', { hoverable: pagination.current != 1, disabled : pagination.current == 1 }]">
+			<a href="" ng-click="setCurrent(pagination.current - 1)">‹</a>
+		</li>
+		<li ng-repeat="pageNumber in pages track by $index" ng-class="['wave-effect',{ active : pagination.current == pageNumber, disabled : pageNumber == '...',}]">
+			<a href="" ng-click="setCurrent(pageNumber)">{{pageNumber}}</a>
+		</li>
+		<li ng-if="directionLinks" ng-class="['wave-effect', { 'hoverable': pagination.current != pagination.last, disabled : pagination.current == pagination.last }]">
+			<a href="" ng-click="setCurrent(pagination.current + 1)">›</a>
+		</li>
+	</ul>
+	<div class="card-panel light-yellow small hoverable">
+		<span class="card-content secondary-content">Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}&nbsp;items.</span>
+	</div>
+</div>

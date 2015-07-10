@@ -21,10 +21,10 @@
 	<button ng-click="reset()" class="btn red waves-effect">Reset</button>
 	<a href="/parties" class="btn green right waves-effect">Back</a>
 </div>
-<a href="#" class="dropdown-button btn teal" data-activates="dropdown_user">Invite Users</a>
-<ul id="dropdown_user" class="dropdown-content" ng-init="popDropdown()">
+<a href="#" class="dropdown-button btn teal" data-activates="dropdown_user" m-dropdown>Invite Users</a>
+<ul id="dropdown_user" class="dropdown-content">
 	<li ng-repeat="user in users">
-		<div ng-class="'btn small '+(party.invited[user._id]?'teal':'grey')" style="width: 100%" ng-click="invite(user)">
+		<div ng-class="['btn','small',party.invited[user._id]?'teal':'grey']" style="width: 100%" ng-click="invite(user)">
 			{{user.emails[0].address}}
 		</div>
 	</li>

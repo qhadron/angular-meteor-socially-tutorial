@@ -1,8 +1,9 @@
 /// <reference path="../typings/angular-meteor/angular-meteor.d.ts"/>
-Meteor.publish("parties", function () {
+
+Meteor.publish("parties", function (options) {
 	var invitedQuery = {};
 	invitedQuery['invited.' + this.userId] = true;
-	return Parties.find({
+	var totalQuery = {
 		$or: [
 			{$and:[
 				{ "public": true },
@@ -19,5 +20,7 @@ Meteor.publish("parties", function () {
 				]
 			}
 		]
-	});
+	};
+	Counts.publish(this, 'numberOfParties', Parties.find(totalQuery),{noReady:true});
+	return Parties.find(totalQuery, options);
 }) 
