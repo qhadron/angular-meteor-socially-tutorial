@@ -1,5 +1,5 @@
-<div class="valign-wrapper">
-	<ul class="pagination row valign" ng-if="1 < pages.length">
+<div class="row">
+	<ul class="pagination" ng-if="1 < pages.length">
 		<li ng-if="directionLinks" ng-class="['wave-effect', { hoverable: pagination.current != 1, disabled : pagination.current == 1 }]">
 			<a href="" ng-click="setCurrent(pagination.current - 1)">‹</a>
 		</li>
@@ -10,7 +10,7 @@
 			<a href="" ng-click="setCurrent(pagination.current + 1)">›</a>
 		</li>
 	</ul>
-	<div class="card-panel light-yellow small hoverable">
-		<span class="card-content secondary-content">Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}&nbsp;items.</span>
+	<div class="card-panel light-yellow small hoverable secondary-content">
+		<span class="card-content">Displaying {{ range.lower }} - {{ range.upper }} of {{ range.total }}&nbsp;items.</span>
 	</div>
 </div>
