@@ -1,34 +1,39 @@
 <form class="card">
-	<div class="row">
-		<div class="input-field card-content col s6">
-			<label for="input_name">Name:</label>
-			<input type="text" id="input_name" ng-model="newParty.name">
+	<div class="content">
+		<div class="row">
+			<div class="input-field card-content col s6">
+				<label for="input_name">Name:</label>
+				<input type="text" id="input_name" ng-model="newParty.name">
+			</div>
+			<div class="input-field card-content col s6">
+				<label for="input_desc">Description:</label>
+				<input type="text" id="input_desc" ng-model="newParty.description">
+			</div>
 		</div>
-		<div class="input-field card-content col s6">
-			<label for="input_desc">Description:</label>
-			<input type="text" id="input_desc" ng-model="newParty.description">
+		<div class="switch">
+			<label>Private
+				<input type="checkbox" ng-model="newParty.public">
+				<span class="lever"></span>Public</label>
 		</div>
+		<button ng-click="addParty()" class="hoverable right blue btn-large waves-effect">
+			<i class="large material-icons">Add</i>
+		</button>
 	</div>
-	<div class="switch">
-		<label>Private
-			<input type="checkbox" ng-model="newParty.public">
-			<span class="lever"></span>Public</label>
-	</div>
-	<button ng-click="addParty()" class="hoverable right blue btn-large waves-effect">
-		<i class="large material-icons">Add</i>
-	</button>
 </form>
-<button class="btn red waves-effect waves-light" ng-click="removeAll()">Remove All</button>
-<a href="#" class="dropdown-button btn teal right"  data-activates="dropdown_sort" m-dropdown>Sort by</a>
-<ul id="dropdown_sort" class="dropdown-content">
-	<li ng-repeat="method in sortMethods">
-		<div ng-class="['btn','small',method.val===sort?'teal':'grey']" style="width: 100%" ng-click="sortBy(method.val)">
-			{{method.display}}
-		</div>
-	</li>
-</ul>
+<div class="content">
+	<button class="btn red waves-effect waves-light" ng-click="removeAll()">Remove All</button>
+	<div class="right">
+		<label for="dropdown_sort_button">Sort by:</label>
+		<a href="#" id="dropdown_sort_button" class="dropdown-button btn teal" data-activates="dropdown_sort" m-dropdown>{{sort.display}}</a>
+	</div>
+	<ul id="dropdown_sort" class="dropdown-content">
+		<li ng-repeat="method in sortMethods">
+			<div ng-class="['btn','small',(cmp(method,sort))?'teal':'grey']" style="width: 100%" ng-click="sortBy(method)">{{method.display}}</div>
+		</li>
+	</ul>
+</div>
 <div>
-	<div dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" ng-class="['card', 'hoverable', party.public?'white':'grey']">
+	<div current-page="page" dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" ng-class="['card', 'hoverable', party.public?'white':'grey']">
 		<button class="btn red waves-effect waves-light right" ng-click="remove(party)">X</button>
 		<a ng-href="/parties/{{party._id}}" class="card-content">
 			<span class="card-title black-text">{{party.name}}</span>

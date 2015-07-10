@@ -20,9 +20,9 @@ app.controller('PartiesListCtrl',
 				val: { 'public': 1 }
 			}
 		];
-		$scope.page = 1;
+		$scope.page = Session.get('partiesPage') || 1;
 		$scope.perPage = 3;
-		$scope.sort = $scope.sortMethods[0].val;
+		$scope.sort = Session.get('partiesSortMethod') || $scope.sortMethods[0];
 		
 		//update data
 		$meteor.subscribe('users');
@@ -31,10 +31,10 @@ app.controller('PartiesListCtrl',
 			$meteor.subscribe('parties', {
 				limit: ($scope.getReactively('perPage')),
 				skip: (($scope.getReactively('page') - 1) * $scope.getReactively('perPage')),
-				sort: $scope.getReactively('sort')
+				sort: $scope.getReactively('sort').val
 			}).then(function () {
 				$scope.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
-				console.log(Parties.find({}, { sort: $scope.sort }).fetch());
+				console.log($scope.parties);
 			});
 		});
 		
@@ -42,7 +42,7 @@ app.controller('PartiesListCtrl',
 		$scope.parties = $meteor.collection(function () {
 			console.log("Data sorted...");
 			return Parties.find({}, {
-				sort: $scope.getReactively('sort')
+				sort: $scope.getReactively('sort').val
 			});
 		});
 
@@ -65,12 +65,17 @@ app.controller('PartiesListCtrl',
 		}
 
 		$scope.pageChanged = function (newPage) {
-			$scope.page = newPage;
+			Session.set('partiesPage', newPage);
 		}
 
 
 		$scope.sortBy = function (method) {
 			$scope.sort = method;
+			Session.set('partiesSortMethod', method);
+		}
+		
+		$scope.cmp = function (a, b) {
+			return JSON.stringify(a) === JSON.stringify(b);
 		}
 	});
 							
