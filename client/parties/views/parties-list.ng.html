@@ -9,11 +9,6 @@
 			<input type="text" id="input_desc" ng-model="newParty.description">
 		</div>
 	</div>
-	<!-- <div class="input-field card-content">
-		<input type="checkbox" id="checkbox_public" ng-model="newParty.public">
-		<label for="checkbox_public">Public</label>
-	</div>
-	-->
 	<div class="switch">
 		<label>Private
 			<input type="checkbox" ng-model="newParty.public">
@@ -29,7 +24,8 @@
 		<button class="btn red waves-effect waves-light right" ng-click="remove(party)">X</button>
 		<a ng-href="/parties/{{party._id}}" class="card-content">
 			<span class="card-title black-text">{{party.name}}</span>
-			<p class="grey-text card-content">{{party.description}}</p>
+			<p ng-class="'grey-text card-content '+(party.public?null:'text-lighten-4')">{{party.description}}</p>
+			<div class="secondary-content card-content">Owner: {{getUser(party.owner).emails[0].address||"Admin"}}</div>
 		</a>
 	</div>
 </div>

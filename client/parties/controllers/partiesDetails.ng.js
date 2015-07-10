@@ -23,5 +23,20 @@ app.controller('PartyDetailsCtrl',
 				belowOrigin: true // Displays dropdown below the button
 			});
 		}
+		$scope.invite = function (user) {
+			$scope.party.invited = $scope.party.invited || {};
+			$scope.party.invited[user._id] = !$scope.party.invited[user._id];
+			$scope.party.save();
+		}
+		$scope.owner = getUser($scope.party.owner);
+		
+		$scope.$watch('party.invited', function () {
+			$scope.invitedUsers = Object.keys($scope.party.invited)
+				.filter(function (key) {
+					return $scope.party.invited[key];
+				}).map(function (val, i, arr) {
+					return getUser(val);
+				});
+		});
 	});
 

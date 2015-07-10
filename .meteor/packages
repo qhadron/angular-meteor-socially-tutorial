@@ -10,7 +10,4 @@ angularui:angular-ui-router
 materialize:materialize
 accounts-password
 accounts-ui
-accounts-facebook
-accounts-twitter
-accounts-google
 jquery

@@ -2,6 +2,7 @@
 	<h2 class="card-content">
 		<span class="card-title black-text">Party Details</span>
 	</h2>
+	<div class="secondary-content card-content">Owner: {{owner.emails[0].address||"Admin"}}</div>
 	<div class="input-field card-content">
 		<label for="input_name">Name:</label>
 		<input id="input_name" type="text" ng-model="party.name">
@@ -23,8 +24,19 @@
 <a href="#" class="dropdown-button btn teal" data-activates="dropdown_user">Invite Users</a>
 <ul id="dropdown_user" class="dropdown-content" ng-init="popDropdown()">
 	<li ng-repeat="user in users">
-		<div class="btn small" style="width: 100%">
+		<div ng-class="'btn small '+(party.invited[user._id]?'teal':'grey')" style="width: 100%" ng-click="invite(user)">
 			{{user.emails[0].address}}
 		</div>
 	</li>
+</ul>
+<ul class="collection with-header">
+	<li class="collection-header">
+		<h5>Owner</h5>
+	</li>
+	 <li class="collection-item">{{owner.emails[0].address||"There is no owner"}}</li>
+	<li class="collection-header">
+		<h5>Invited Users</h5>
+	</li>
+	<li class="collection-item" ng-show="invitedUsers.length==0">No one is invited</li>
+	<li class="collection-item" ng-repeat="user in invitedUsers">{{user.emails[0].address}}</li>
 </ul>

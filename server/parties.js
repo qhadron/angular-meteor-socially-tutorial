@@ -1,5 +1,7 @@
 /// <reference path="../typings/angular-meteor/angular-meteor.d.ts"/>
 Meteor.publish("parties", function () {
+	var invitedQuery = {};
+	invitedQuery['invited.' + this.userId] = true;
 	return Parties.find({
 		$or: [
 			{$and:[
@@ -9,7 +11,13 @@ Meteor.publish("parties", function () {
 			{$and:[
 				{ owner: this.userId },
 				{ owner: {$exists:true}}
-			]}
+			]},
+			{
+				$and: [
+					{ "invited": { $exists: true } },
+					invitedQuery
+				]
+			}
 		]
-	})
-})
+	});
+}) 
