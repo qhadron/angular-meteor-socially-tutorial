@@ -11,3 +11,5 @@ materialize:materialize
 accounts-password
 accounts-ui
 jquery
+angularutils:pagination
+tmeasday:publish-counts
