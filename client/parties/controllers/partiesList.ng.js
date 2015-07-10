@@ -32,7 +32,7 @@ app.controller('PartiesListCtrl',
 				limit: ($scope.getReactively('perPage')),
 				skip: (($scope.getReactively('page') - 1) * $scope.getReactively('perPage')),
 				sort: $scope.getReactively('sort').val
-			}).then(function () {
+			}, $scope.getReactively('search')).then(function () {
 				$scope.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
 				console.log($scope.parties);
 			});
@@ -62,6 +62,7 @@ app.controller('PartiesListCtrl',
 			$scope.newParty.invited = {};
 			$scope.parties.push($scope.newParty);
 			$scope.newParty = '';
+			$('#modal_add').closeModal();
 		}
 
 		$scope.pageChanged = function (newPage) {

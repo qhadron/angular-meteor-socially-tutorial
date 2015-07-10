@@ -1,26 +1,12 @@
-<form class="card">
-	<div class="content">
-		<div class="row">
-			<div class="input-field card-content col s6">
-				<label for="input_name">Name:</label>
-				<input type="text" id="input_name" ng-model="newParty.name">
-			</div>
-			<div class="input-field card-content col s6">
-				<label for="input_desc">Description:</label>
-				<input type="text" id="input_desc" ng-model="newParty.description">
-			</div>
-		</div>
-		<div class="switch">
-			<label>Private
-				<input type="checkbox" ng-model="newParty.public">
-				<span class="lever"></span>Public</label>
-		</div>
-		<button ng-click="addParty()" class="hoverable right blue btn-large waves-effect">
-			<i class="large material-icons">Add</i>
-		</button>
+<div class="card z-depth-1">
+	<div class="input-field card-content">
+		<label>Search</label>
+		<input type="search" ng-model="search">
 	</div>
-</form>
+</div>
 <div class="content">
+	<!-- Modal Trigger -->
+	<a class="waves-effect waves-light btn modal-trigger green" href="#modal_add" m-modal>Create</a>
 	<button class="btn red waves-effect waves-light" ng-click="removeAll()">Remove All</button>
 	<div class="right">
 		<label for="dropdown_sort_button">Sort by:</label>
@@ -31,6 +17,34 @@
 			<div ng-class="['btn','small',(cmp(method,sort))?'teal':'grey']" style="width: 100%" ng-click="sortBy(method)">{{method.display}}</div>
 		</li>
 	</ul>
+</div>
+<!-- Modal Structure -->
+<div class="modal" id="modal_add">
+	<form class="modal-content">
+		<div class="content">
+			<h4 class="card-title black-text">Create Party</h4>
+			<div class="row">
+				<div class="input-field card-content col s6">
+					<label for="input_name">Name:</label>
+					<input type="text" id="input_name" ng-model="newParty.name">
+				</div>
+				<div class="input-field card-content col s6">
+					<label for="input_desc">Description:</label>
+					<input type="text" id="input_desc" ng-model="newParty.description">
+				</div>
+			</div>
+			<div class="switch">
+				<label>Private
+					<input type="checkbox" ng-model="newParty.public">
+					<span class="lever"></span>Public</label>
+			</div>
+		</div>
+	</form>
+	<div class="modal-footer">
+		<a href="#!" ng-click="addParty()" class="hoverable right blue btn-floating btn-large waves-effect">
+			<i>Add</i>
+		</a>
+	</div>
 </div>
 <div>
 	<div current-page="page" dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" ng-class="['card', 'hoverable', party.public?'white':'grey']">
