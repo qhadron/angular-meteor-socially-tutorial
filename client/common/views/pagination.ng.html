@@ -1,5 +1,5 @@
-<div class="row">
-	<ul class="pagination" ng-if="1 < pages.length">
+<div class="row" ng-if="1 < pages.length">
+	<ul class="pagination">
 		<li ng-if="directionLinks" ng-class="['wave-effect', { hoverable: pagination.current != 1, disabled : pagination.current == 1 }]">
 			<a href="" ng-click="setCurrent(pagination.current - 1)">‹</a>
 		</li>
