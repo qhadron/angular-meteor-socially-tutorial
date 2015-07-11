@@ -3,7 +3,6 @@ app.directive('mDropdown', function ($timeout) {
 	return {
 		restrict: 'A',
 		controller: function () {
-			console.log("dropdown task added....");
 			//load jquery after rendering has finished
 			$timeout(function () {
 				$('.dropdown-button').dropdown({
@@ -23,7 +22,6 @@ app.directive('mModal', function ($timeout) {
 	return {
 		restrict: 'A',
 		controller: function () {
-			console.log("modal task added");
 			//load jquery after rendering has finished
 			$timeout(function () {
 				$(document).ready(function () {

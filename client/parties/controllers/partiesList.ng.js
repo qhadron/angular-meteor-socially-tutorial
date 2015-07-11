@@ -27,20 +27,17 @@ app.controller('PartiesListCtrl',
 		//update data
 		$meteor.subscribe('users');
 		$meteor.autorun($scope, function () {
-			console.log("Data changed....");
 			$meteor.subscribe('parties', {
 				limit: ($scope.getReactively('perPage')),
 				skip: (($scope.getReactively('page') - 1) * $scope.getReactively('perPage')),
 				sort: $scope.getReactively('sort').val
 			}, $scope.getReactively('search')).then(function () {
 				$scope.partiesCount = $meteor.object(Counts, 'numberOfParties', false);
-				console.log($scope.parties);
 			});
 		});
 		
 		//scope methods
 		$scope.parties = $meteor.collection(function () {
-			console.log("Data sorted...");
 			return Parties.find({}, {
 				sort: $scope.getReactively('sort').val
 			});
@@ -74,7 +71,7 @@ app.controller('PartiesListCtrl',
 			$scope.sort = method;
 			Session.set('partiesSortMethod', method);
 		}
-		
+
 		$scope.cmp = function (a, b) {
 			return JSON.stringify(a) === JSON.stringify(b);
 		}
