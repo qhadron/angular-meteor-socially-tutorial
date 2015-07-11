@@ -48,11 +48,11 @@
 </div>
 <div>
 	<div current-page="page" dir-paginate="party in parties | itemsPerPage: perPage" total-items="partiesCount.count" ng-class="['card', 'hoverable', party.public?'white':'grey']">
-		<button class="btn red waves-effect waves-light right" ng-click="remove(party)">X</button>
+		<button ng-if="party.owner === $rootScope.currentUser._id" class="btn red waves-effect waves-light right" ng-click="remove(party)">X</button>
 		<a ng-href="/parties/{{party._id}}" class="card-content">
 			<span class="card-title black-text">{{party.name}}</span>
 			<p ng-class="['grey-text', 'card-content', {'text-lighten-4':!party.public}]">{{party.description}}</p>
-			<div class="secondary-content card-content">Owner: {{getUser(party.owner).emails[0].address||"Admin"}}</div>
+			<div class="secondary-content card-content">Owner: {{getUser(party.owner) | displayName}}</div>
 		</a>
 	</div>
 	<dir-pagination-controls on-page-change="pageChanged(newPageNumber)" auto-hide="true" template-url="client/common/views/pagination.ng.html"></dir-pagination-controls>
